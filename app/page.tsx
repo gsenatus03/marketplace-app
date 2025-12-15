@@ -106,34 +106,59 @@ export default function Home() {
 
   // MARKETPLACE
   return (
-  <div className="min-h-screen bg-sky-50">
-    {/* Header */}
-    <header className="bg-white shadow-sm p-4 flex justify-between items-center">
-      <h1 className="text-xl font-bold text-sky-500">SkyMarket</h1>
-      <a
-        href="/create"
-        className="bg-sky-500 text-white px-4 py-2 rounded-full text-sm"
-      >
-        Sell
-      </a>
-    </header>
-
-    {/* Listings */}
-    <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {listings.map((l) => (
-        <div
-          key={l.id}
-          className=""bg-white p-4 rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer"
+    <div className="min-h-screen bg-sky-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm p-4 flex justify-between items-center">
+        <h1 className="text-xl font-bold text-sky-500">SkyMarket</h1>
+        <button
+          onClick={logout}
+          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
         >
-          <img
-            src={l.image_url}
-            className="h-44 w-full object-cover rounded-xl mb-3 bg-gray-100"
-            alt={l.title}
-          />
-          <h2 className="font-semibold text-gray-800">{l.title}</h2>
-          <p className="text-sky-500 font-bold text-lg">${l.price}</p>
-        </div>
-      ))}
+          Logout
+        </button>
+      </header>
+
+      {/* Add Listing Form */}
+      <div className="p-4 max-w-md mx-auto bg-white rounded-lg shadow mb-4">
+        <h2 className="text-lg font-bold mb-3">Create Listing</h2>
+        <input
+          className="border p-2 w-full mb-2 rounded"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <input
+          className="border p-2 w-full mb-2 rounded"
+          placeholder="Price"
+          type="number"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImage}
+          className="mb-2 w-full"
+        />
+        <button
+          onClick={addListing}
+          className="bg-sky-500 hover:bg-sky-600 text-white w-full p-2 rounded"
+        >
+          Add Listing
+        </button>
+      </div>
+
+      {/* Items Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+        {items.map((item) => (
+          <div key={item.id} className="bg-white rounded-lg shadow p-4">
+            {item.image && <img src={item.image} alt={item.title} className="w-full h-40 object-cover rounded mb-2" />}
+            <h3 className="font-bold text-lg">{item.title}</h3>
+            <p className="text-sky-600 font-semibold">${item.price}</p>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+}
+    
