@@ -15,7 +15,7 @@ export default function Home() {
 
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<string | null>(null);
 
   // LOAD SAVED DATA
   useEffect(() => {
@@ -59,7 +59,7 @@ export default function Home() {
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = () => setImage(reader.result);
+    reader.onload = () => setImage(reader.result as string);
     reader.readAsDataURL(file);
   }
 
