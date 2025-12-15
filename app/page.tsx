@@ -106,57 +106,34 @@ export default function Home() {
 
   // MARKETPLACE
   return (
-    <main className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow p-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-sky-600">Marketplace</h1>
-        <button onClick={logout} className="text-sm text-gray-500">Logout</button>
-      </header>
+  <div className="min-h-screen bg-sky-50">
+    {/* Header */}
+    <header className="bg-white shadow-sm p-4 flex justify-between items-center">
+      <h1 className="text-xl font-bold text-sky-500">SkyMarket</h1>
+      <a
+        href="/create"
+        className="bg-sky-500 text-white px-4 py-2 rounded-full text-sm"
+      >
+        Sell
+      </a>
+    </header>
 
-      <div className="max-w-5xl mx-auto p-4">
-        <div className="bg-white p-4 rounded-2xl shadow mb-6">
-          <h2 className="font-semibold mb-2">Sell an item</h2>
-          <div className="flex flex-col gap-2">
-            <input
-              className="border p-2 rounded"
-              placeholder="Item title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <input
-              className="border p-2 rounded"
-              placeholder="Price"
-              type="number"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-            <input type="file" accept="image/*" onChange={handleImage} />
-            <button
-              onClick={addListing}
-              className="bg-sky-500 hover:bg-sky-600 text-white p-2 rounded"
-            >
-              Post
-            </button>
-          </div>
+    {/* Listings */}
+    <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {listings.map((l) => (
+        <div
+          key={l.id}
+          className=""bg-white p-4 rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer"
+        >
+          <img
+            src={l.image_url}
+            className="h-44 w-full object-cover rounded-xl mb-3 bg-gray-100"
+            alt={l.title}
+          />
+          <h2 className="font-semibold text-gray-800">{l.title}</h2>
+          <p className="text-sky-500 font-bold text-lg">${l.price}</p>
         </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {items.map((item) => (
-            <div key={item.id} className="bg-white rounded-2xl shadow overflow-hidden">
-              {item.image ? (
-                <img src={item.image} className="h-32 w-full object-cover" />
-              ) : (
-                <div className="h-32 bg-gray-200 flex items-center justify-center text-gray-400">
-                  No Image
-                </div>
-              )}
-              <div className="p-3">
-                <h3 className="font-medium truncate">{item.title}</h3>
-                <p className="text-sky-600 font-bold">${item.price}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </main>
-  );
-}
+      ))}
+    </div>
+  </div>
+);
