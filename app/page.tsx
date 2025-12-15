@@ -4,7 +4,14 @@ import { useEffect, useState } from 'react';
 export default function Home() {
   const [username, setUsername] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
-  const [items, setItems] = useState([]);
+  type Item = {
+  id: number;
+  title: string;
+  price: number;
+  image: string | null;
+};
+
+  const [items, setItems] = useState<Item[]>([]);
 
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
@@ -18,7 +25,7 @@ export default function Home() {
     const savedItems = localStorage.getItem('items');
     if (savedItems) setItems(JSON.parse(savedItems));
     else {
-      const defaults = [
+      const defaults: Item[] = [
         { id: 1, title: 'Bicycle', price: 120, image: null },
         { id: 2, title: 'Laptop', price: 450, image: null },
         { id: 3, title: 'Phone', price: 300, image: null },
@@ -28,10 +35,11 @@ export default function Home() {
     }
   }, []);
 
-  // SAVE ITEMS
+  // SAVE ITEMS (WITHOUT IMAGES TO AVOID STORAGE LIMIT)
   useEffect(() => {
     if (items.length > 0) {
-      localStorage.setItem('items', JSON.stringify(items));
+      const safeItems = items.map(({ image, ...rest }) => rest);
+      localStorage.setItem('items', JSON.stringify(safeItems));
     }
   }, [items]);
 
