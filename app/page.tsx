@@ -54,7 +54,7 @@ export default function Home() {
     setLoggedIn(false);
   }
 
-  function handleImage(e) {
+  function handleImage(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
 
