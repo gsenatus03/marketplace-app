@@ -134,12 +134,6 @@ export default function Home() {
     Profile
   </a>
 </nav>
-{/* Bottom Navigation */}
-<nav className="fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around py-3 text-sm text-blue-600">
-  <a href="/" className="font-semibold">Home</a>
-  <a href="/sell">Sell</a>
-  <a href="/profile">Profile</a>
-</nav>
 
     </div>
   );
